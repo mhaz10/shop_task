@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shop_app_task/features/offers/data/models/product_model.dart';
 
 import '../../../core/helper/app_responsive.dart';
 import '../../../core/helper/app_text_style.dart';
@@ -8,7 +9,9 @@ import '../../../core/utils/app_icons.dart';
 import '../../../core/utils/app_images.dart';
 
 class CustomItem extends StatelessWidget {
-  const CustomItem({super.key});
+  const CustomItem({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class CustomItem extends StatelessWidget {
                   color: AppColors.black.withOpacity(0.1),
                   borderRadius: BorderRadius.only(topRight: Radius.circular(4), topLeft: Radius.circular(4))
               ),
-              child: Image.asset(AppImages.tShirt),
+              child: Image.asset(product.image ?? ''),
             ),
             SizedBox(height: AppResponsive.height(context, value: 8)),
             Row(
@@ -37,7 +40,7 @@ class CustomItem extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    'جاكيت من الصوف مناسب',
+                    product.name,
                     style: AppTextStyle.font14Medium.copyWith(
                       color: AppColors.black,
                     ),
@@ -69,7 +72,7 @@ class CustomItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '32,000,000جم/',
+                        '${product.price} جم/',
                         style: AppTextStyle.font14Medium.copyWith(
                           color: AppColors.red,
                         ),
